@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    PROCESS AUTOMATION SERVICES LLC — Single-file site
+    Requirements covered:
+    • American English copy tailored to Machinery/Equipment Wholesalers
+    • Inlined CSS + a tiny bit of JS (no external files)
+    • Smooth scrolling between menu items
+    • Modal contact form + “message sent” confirmation modal
+    • Clear sections with distinctive headings
+    • Accessibility: semantic HTML, alt text, aria-*, proper contrast, focus states, ESC to close modal, trap focus
+    • Privacy + Compliance notes aligned with Apple’s Developer policies (no tracking, clear data use)
+    • Responsive layout, modern UI similar in spirit to the reference image (hero band + icon rows + map band)
+  -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="PROCESS AUTOMATION SERVICES LLC — wholesale distributor of industrial automation machinery, equipment, and supplies. Miami-based, nationwide delivery, vendor-neutral engineering support." />
+  <title>PROCESS AUTOMATION SERVICES LLC — Industrial Automation Wholesaler</title>
+  <style>
+    :root{
+      --bg:#0e0f13;
+      --surface:#171923;
+      --ink:#e9edf5;
+      --muted:#b8c0d6;
+      --brand:#f2994a;
+      --brand-2:#ffcc80;
+      --accent:#5ac8fa; /* iOS blue for subtle accents */
+      --ok:#34c759;
+      --warn:#ff9f0a;
+      --danger:#ff3b30;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:18px;
+      --grad-1:linear-gradient(120deg, rgba(255,165,92,.18), rgba(255,255,255,0) 50%);
+      --grad-2:linear-gradient(180deg, rgba(242,153,74,.22), rgba(0,0,0,0) 60%);
+      --maxw:1180px;
+      --line:1.6;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;scroll-behavior:smooth;background:var(--bg);color:var(--ink);font:16px/var(--line) system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%;display:block}
+    /* Header / Nav */
+    header{
+      position:sticky;top:0;z-index:50;background:rgba(14,15,19,.75);
+      backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid rgba(255,255,255,.06)
+    }
+    .nav{
+      max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;
+    }
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand-logo{
+      width:42px;height:42px;border-radius:10px;background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.18) 0 40%, transparent 41%),
+        linear-gradient(145deg, #ffb46b, #f2994a);
+      box-shadow:inset 0 0 18px rgba(0,0,0,.25), var(--shadow);
+      position:relative;
+    }
+    .brand-logo:after{
+      content:"";position:absolute;inset:8px;border-radius:8px;
+      background:
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 64 64"><g fill="none" stroke="%23000" stroke-opacity=".28" stroke-width="2"><circle cx="20" cy="22" r="8"/><path d="M20 10v4M20 30v4M8 22h4M28 22h4M14 16l3 3M14 28l3-3M26 16l-3 3M26 28l-3-3"/></g><g fill="%23ffffff" fill-opacity=".75"><path d="M44 18h12v6H44zM44 40h12v6H44z"/></g></svg>') center/90% no-repeat,
+        linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,0));
+    }
+    .brand h1{font-size:18px;letter-spacing:.4px;margin:0;font-weight:700}
+    .brand small{display:block;color:var(--muted);font-weight:500}
+    nav ul{list-style:none;display:flex;gap:18px;margin:0;padding:0;align-items:center}
+    nav a{
+      display:inline-block;padding:10px 14px;border-radius:12px;color:var(--ink);
+    }
+    nav a:hover, nav a:focus{
+      background:rgba(255,255,255,.08);outline:none
+    }
+    .cta{
+      background:linear-gradient(135deg, var(--brand), var(--brand-2));
+      color:#1b1209;border:none;border-radius:14px;padding:10px 16px;font-weight:700;
+      box-shadow:var(--shadow)
+    }
+    .cta:hover{filter:brightness(1.05)}
+    /* Hero */
+    .hero{
+      position:relative;min-height:82vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;
+      background:
+        radial-gradient(1000px 480px at 70% 10%, rgba(255,200,150,.07), transparent 70%),
+        var(--grad-1), var(--grad-2),
+        #0b0c10;
+    }
+    /* Inline SVG “industrial” background silhouette as data-URI to avoid external assets */
+    .hero::before{
+      content:"";position:absolute;inset:-2px;opacity:.28;background:
+      url('data:image/svg+xml;utf8,\
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox=\"0 0 1600 900\" preserveAspectRatio=\"xMidYMid slice\">\
+        <defs>\
+          <linearGradient id=\"g\" x1=\"0\" x2=\"1\" y1=\"0\" y2=\"1\">\
+            <stop offset=\"0\" stop-color=\"%23ffb26b\" stop-opacity=\"0.25\"/>\
+            <stop offset=\"1\" stop-color=\"%23ff7a18\" stop-opacity=\"0.15\"/>\
+          </linearGradient>\
+        </defs>\
+        <rect width=\"1600\" height=\"900\" fill=\"url(%23g)\"/>\
+        <g fill=\"%23ffffff\" opacity=\"0.08\">\
+          <path d=\"M0 700h250l40-60h120l60 60h220l90-120h140l60 70h180l80-150h120l60 90h240v200H0z\"/>\
+          <circle cx=\"420\" cy=\"690\" r=\"44\"/>\
+          <circle cx=\"780\" cy=\"690\" r=\"44\"/>\
+          <rect x=\"980\" y=\"560\" width=\"220\" height=\"90\"/>\
+          <rect x=\"1280\" y=\"540\" width=\"180\" height=\"110\"/>\
+        </g>\
+      </svg>') center/cover no-repeat;
+      filter:contrast(105%) saturate(110%);
+    }
+    .hero .wrap{max-width:900px;padding:100px 24px;position:relative}
+    .kicker{color:var(--brand-2);letter-spacing:.3em;text-transform:uppercase;font-weight:800;font-size:.85rem}
+    .title{font-weight:900;font-size:clamp(36px,5vw,64px);line-height:1.05;margin:12px 0}
+    .subtitle{color:var(--muted);font-size:clamp(16px,2.2vw,20px)}
+    .hero-cta{margin-top:28px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .ghost{
+      border:1px solid rgba(255,255,255,.22);background:transparent;color:var(--ink);
+      border-radius:14px;padding:10px 16px;font-weight:700
+    }
+    .ghost:hover{border-color:rgba(255,255,255,.38)}
+    /* Sections */
+    section{scroll-margin-top:84px}
+    .band{
+      padding:80px 20px;background:
+        radial-gradient(600px 160px at 20% 0%, rgba(90,200,250,.06), transparent 70%),
+        linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+      border-top:1px solid rgba(255,255,255,.06)
+    }
+    .container{max-width:var(--maxw);margin:0 auto}
+    .eyebrow{letter-spacing:.2em;text-transform:uppercase;color:var(--brand-2);font-weight:800;font-size:.8rem}
+    .h2{font-size:clamp(24px,3.2vw,40px);line-height:1.15;margin:6px 0 10px;font-weight:900}
+    .lead{color:var(--muted);max-width:900px}
+    .grid{display:grid;gap:22px}
+    .cols-3{grid-template-columns:repeat(3,1fr)}
+    .cols-2{grid-template-columns:repeat(2,1fr)}
+    @media (max-width:920px){.cols-3{grid-template-columns:1fr}.cols-2{grid-template-columns:1fr}}
+    .card{
+      background:var(--surface);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);
+      padding:22px;box-shadow:var(--shadow);position:relative;overflow:hidden
+    }
+    .card::after{
+      content:"";position:absolute;inset:-1px;border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), transparent 30%);
+      pointer-events:none
+    }
+    .icon{
+      width:48px;height:48px;border-radius:12px;
+      background:linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.04));
+      display:grid;place-items:center;margin-bottom:10px
+    }
+    .icon svg{width:26px;height:26px}
+    .muted{color:var(--muted)}
+    .pill{
+      display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--ink);
+      font-weight:600;font-size:.85rem;margin-top:6px
+    }
+    .list{margin:0;padding-left:16px}
+    .list li{margin:.35rem 0}
+    .adv h3{margin:4px 0 4px;font-size:1.05rem}
+    /* Process arrows */
+    .process{counter-reset:step}
+    .process .step{
+      position:relative;padding-left:72px;min-height:64px
+    }
+    .process .step::before{
+      counter-increment:step;content:counter(step);
+      position:absolute;left:0;top:0;width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg, var(--brand), var(--brand-2));
+      color:#1b1209;display:grid;place-items:center;font-weight:900;box-shadow:var(--shadow)
+    }
+    .process .step:not(:last-child)::after{
+      content:"";position:absolute;left:23px;top:54px;width:2px;height:46px;background:linear-gradient(180deg, rgba(255,255,255,.15), rgba(255,255,255,0))
+    }
+    /* Map-like band imitation (no external map calls for privacy) */
+    .mapband{
+      background:
+        linear-gradient(0deg, rgba(0,0,0,.65), rgba(0,0,0,.65)),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400"><rect width="1200" height="400" fill="%23212836"/><g stroke="%23a3b1d1" stroke-opacity=".25" stroke-width="1" fill="none"><path d="M0 50h1200M0 100h1200M0 150h1200M0 200h1200M0 250h1200M0 300h1200M0 350h1200"/><path d="M50 0v400M100 0v400M150 0v400M200 0v400M250 0v400M300 0v400M350 0v400M400 0v400M450 0v400M500 0v400M550 0v400M600 0v400M650 0v400M700 0v400M750 0v400M800 0v400M850 0v400M900 0v400M950 0v400M1000 0v400M1050 0v400M1100 0v400M1150 0v400"/></g><g stroke="%235ac8fa" stroke-opacity=".5" stroke-width="2"><path d="M70 320C200 250 380 280 500 220S850 140 1130 180"/></g><g fill="%23ffcc80"><circle cx="980" cy="200" r="6"/><circle cx="350" cy="250" r="6"/><circle cx="1120" cy="180" r="6"/></g></svg>') center/cover no-repeat;
+      color:#e6ecfa
+    }
+    .mapband .wrap{display:grid;gap:18px}
+    /* Footer */
+    footer{padding:40px 20px;color:var(--muted);border-top:1px solid rgba(255,255,255,.08)}
+    .footgrid{max-width:var(--maxw);margin:0 auto;display:grid;gap:18px;grid-template-columns:2fr 1fr}
+    @media (max-width:920px){.footgrid{grid-template-columns:1fr}}
+    .small{font-size:.9rem}
+    /* Modal (Contact Form) */
+    .modal-backdrop{
+      position:fixed;inset:0;background:rgba(0,0,0,.55);
+      display:none;align-items:center;justify-content:center;padding:20px;z-index:100
+    }
+    .modal-backdrop[aria-hidden="false"]{display:flex}
+    .modal{
+      width:min(720px,96vw);background:var(--surface);border:1px solid rgba(255,255,255,.12);
+      border-radius:20px;box-shadow:var(--shadow);padding:22px
+    }
+    .modal header{position:relative;top:0;background:transparent;border:none;padding:0;margin-bottom:6px}
+    .close{
+      appearance:none;border:none;background:transparent;color:var(--ink);font-size:26px;line-height:1;padding:6px 10px;border-radius:10px;
+      position:absolute;right:6px;top:6px
+    }
+    .close:hover,.close:focus{background:rgba(255,255,255,.08);outline:none}
+    .formgrid{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+    .formgrid .span2{grid-column:1/-1}
+    label{font-weight:700;font-size:.9rem}
+    input,textarea{
+      width:100%;background:#0f1118;border:1px solid rgba(255,255,255,.14);border-radius:12px;color:var(--ink);
+      padding:12px 14px;font-size:1rem
+    }
+    textarea{min-height:120px;resize:vertical}
+    input:focus,textarea:focus{outline:2px solid var(--accent);border-color:var(--accent)}
+    .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
+    .btn-secondary{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:var(--ink);border-radius:12px;padding:10px 14px;font-weight:700}
+    .btn-secondary:hover{filter:brightness(1.1)}
+    .sr-only{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+    /* Focus ring for keyboard users */
+    :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+    /* Tiny helpers */
+    .tagrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .tag{background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.1);padding:6px 10px;border-radius:999px;color:#dfe6f6;font-size:.85rem}
+  </style>
+</head>
+<body>
+  <!-- ====== Header ====== -->
+  <header role="banner" aria-label="Company navigation">
+    <div class="nav">
+      <div class="brand" aria-label="Brand">
+        <div class="brand-logo" aria-hidden="true"></div>
+        <div>
+          <h1 aria-label="PROCESS AUTOMATION SERVICES LLC">PROCESS AUTOMATION SERVICES LLC</h1>
+          <small>Industrial Automation • Machineries & Supplies Wholesaler</small>
+        </div>
+      </div>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">Who We Are</a></li>
+          <li><a href="#services">Solutions</a></li>
+          <li><a href="#adv">Why Partners Choose Us</a></li>
+          <li><a href="#process">How We Work</a></li>
+          <li><a class="cta" href="#contact" data-open-modal="contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ====== Hero ====== -->
+  <section id="hero" class="hero" aria-label="Intro">
+    <div class="wrap">
+      <div class="kicker">PROCESS AUTOMATION SERVICES LLC • Coral Gables, FL</div>
+      <h2 class="title">Wholesale. Vendor-Neutral. Built for Uptime.</h2>
+      <p class="subtitle">
+        We source, stock, and support industrial automation machinery, equipment, and supplies for OEMs, system integrators, and plant maintenance teams across the U.S. —
+        with engineering-grade guidance and same-day fulfillment on critical SKUs.
+      </p>
+      <div class="hero-cta" role="group" aria-label="Primary actions">
+        <a class="cta" href="#services">Explore Solutions</a>
+        <button class="ghost" data-open-modal="contact" aria-haspopup="dialog" aria-controls="contact-modal">Get a Quote</button>
+      </div>
+      <div class="tagrow" aria-label="Trusted capabilities">
+        <span class="tag">PLC & PAC Hardware</span>
+        <span class="tag">Drives & Motion</span>
+        <span class="tag">Sensors & Safety</span>
+        <span class="tag">MRO Essentials</span>
+        <span class="tag">UL-Listed Panels</span>
+        <span class="tag">Kitting & Pre-Config</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== About Us ====== -->
+  <section id="about" class="band" aria-labelledby="about-h">
+    <div class="container">
+      <span class="eyebrow">About the Distributor</span>
+      <h2 id="about-h" class="h2">Supplier-first logistics with engineer-level context</h2>
+      <p class="lead">
+        PROCESS AUTOMATION SERVICES LLC is a wholesale distributor of durable industrial automation products — PLCs, VFDs, HMI panels, safety devices, pneumatics, sensors,
+        cabling, and control enclosures — serving manufacturers, utilities, and infrastructure contractors. From our operations hub at
+        <strong>1600 Ponce De Leon Blvd, Ste 1000, Coral Gables, FL 33134</strong>, we ship nationwide with time-definite options.
+      </p>
+      <p class="lead">
+        We are vendor-neutral and inventory both tier-one and niche brands, allowing us to recommend parts that fit your installed base, not just a single line card.
+        Our team includes former controls engineers who translate specs into stocked SKUs and propose drop-in replacements when supply is tight.
+        We also build custom UL-listed control panels in small series and offer kitted material for integrators.
+      </p>
+      <p class="lead">
+        Compliance and safety are non-negotiable. We maintain RoHS/REACH documentation, provide certificates of conformance on request, and track lot numbers for recalls.
+        Every product ships in protective, moisture-barrier packaging with anti-static handling where applicable.
+      </p>
+      <p class="lead">
+        Above all, we design our wholesale workflows around <em>uptime</em>: fast quoting, live availability, and proactive alternates when a line is constrained.
+        If you need it on the shelf tomorrow, we plan it today.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====== Services ====== -->
+  <section id="services" class="band" aria-labelledby="serv-h">
+    <div class="container">
+      <span class="eyebrow">Our Solutions</span>
+      <h2 id="serv-h" class="h2">From PLC racks to last-mile spares — a wholesaler that speaks “automation”</h2>
+      <div class="grid cols-3">
+        <article class="card" aria-labelledby="s1-h">
+          <div class="icon" aria-hidden="true">
+            <!-- Chip -->
+            <svg viewBox="0 0 24 24" fill="none"><rect x="6" y="6" width="12" height="12" rx="2" stroke="white" opacity=".85"/><path d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4" stroke="white" opacity=".6"/></svg>
+          </div>
+          <h3 id="s1-h">PLC / HMI / Drives Distribution</h3>
+          <p class="muted">
+            We stock PLC and PAC CPUs, I/O modules, HMI displays, industrial PCs, and variable frequency drives from a cross-section of manufacturers.
+            Our team maps your current part numbers to stocked equivalents and flags firmware dependencies before shipment.
+          </p>
+          <p class="muted">
+            For new builds, we pre-configure racks, memory cards, and IP schemas so your field techs can plug-in and power-up. Burn-in testing available on request.
+          </p>
+          <span class="pill">Same-day pick & pack</span>
+        </article>
+
+        <article class="card" aria-labelledby="s2-h">
+          <div class="icon" aria-hidden="true">
+            <!-- Gear -->
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 8a4 4 0 110 8 4 4 0 010-8z" stroke="white"/><path d="M19 12l2-1-1-3-2 .5-1.5-1.9L18 4l-3-1-1 2-2-.1-1-1.9L7 4l1.1 2.3L6.4 8 4 7l-1 3 2 .9v2.2L3 14l1 3 2.3-.8 1.7 1.9L7 20l3 1 1-2 2 .1 1 1.9 3-1-1.1-2.3 1.7-1.9L21 17l1-3-2-.9V12z" stroke="white" opacity=".7"/></svg>
+          </div>
+          <h3 id="s2-h">Safety, Sensors & MRO Essentials</h3>
+          <p class="muted">
+            Light curtains, safety relays, e-stops, prox/photoeye sensors, encoders, power supplies, MCC components, DIN rail, terminals, and industrial cabling — all in one PO.
+            Kitted “truck stock” saves technicians site time and reduces emergency freight costs.
+          </p>
+          <p class="muted">
+            We keep alternates approved with your EHS team so substitutions are pre-cleared when backorders hit. MSDS and SDS documentation ships digitally with every order.
+          </p>
+          <span class="pill">Kitted & labeled lots</span>
+        </article>
+
+        <article class="card" aria-labelledby="s3-h">
+          <div class="icon" aria-hidden="true">
+            <!-- Box -->
+            <svg viewBox="0 0 24 24" fill="none"><path d="M3 7l9-4 9 4-9 4-9-4z" stroke="white"/><path d="M3 7v10l9 4 9-4V7" stroke="white" opacity=".7"/></svg>
+          </div>
+          <h3 id="s3-h">Custom Panel Builds & Pre-Assembly</h3>
+          <p class="muted">
+            For integrators and OEMs, we produce UL 508A panels and pre-wired subassemblies.
+            Our builds ship with as-built schematics, wire markers, torque logs, and FAT documentation, so your site crews can install without rework.
+          </p>
+          <p class="muted">
+            Need speed? We maintain a standard enclosure bill with popular breakers, relays, and terminals to compress lead times to days, not weeks.
+          </p>
+          <span class="pill">UL-listed small series</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== Why Choose Us (Advantages) ====== -->
+  <section id="adv" class="band" aria-labelledby="adv-h">
+    <div class="container">
+      <span class="eyebrow">Reasons Partners Stay</span>
+      <h2 id="adv-h" class="h2">What makes us different in a look-alike market</h2>
+      <div class="grid cols-3 adv">
+        <article class="card">
+          <h3>Engineering-grade distribution</h3>
+          <p class="muted">
+            Quotes include suitability notes, firmware caveats, and dimensional callouts, so procurement and maintenance are aligned before anything ships.
+            We validate environmental ratings (NEMA/IP) and confirm compatibility with your PLC backplane and fieldbus.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Supply assurance without single-brand lock-in</h3>
+          <p class="muted">
+            Because we are vendor-neutral, we maintain alternates and form-fit-function replacements across multiple brands.
+            That means shorter downtime and lower risk during supply shocks.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Logistics built for uptime</h3>
+          <p class="muted">
+            Live stock, 2PM ET same-day shipping on stocked lines, hot-shot couriers in South Florida, and proactive split-ship options for critical paths.
+            Your project schedule doesn’t wait — neither do we.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== Deep Dive (Extra block option) ====== -->
+  <section class="band" aria-labelledby="deep-h">
+    <div class="container">
+      <span class="eyebrow">Deeper Look</span>
+      <h2 id="deep-h" class="h2">Panel builds, documented like your QA wrote them</h2>
+      <div class="grid cols-2">
+        <article class="card">
+          <h3>Documentation you can trust</h3>
+          <ul class="list muted">
+            <li>As-built schematics (PDF + native ECAD formats) with wire and device tags mirrored to panel labels.</li>
+            <li>Torque log by device class; BOM with manufacturer links; FAT checklist signed and archived.</li>
+            <li>Lot/serial capture for traceability and warranty management.</li>
+          </ul>
+          <p class="muted">This is how we compress site time and pass commissioning faster — fewer questions for your QA, more green lights for your schedule.</p>
+        </article>
+        <article class="card">
+          <h3>Field-friendly details</h3>
+          <ul class="list muted">
+            <li>Top-hat DIN layout optimized for cable routing and heat; labeled terminations and ferrules.</li>
+            <li>Pre-flashed PLCs/HMIs with IP plan, user roles, and baseline program placeholders.</li>
+            <li>Shock-absorbing packaging with desiccants and corner guards for LTL and air freight.</li>
+          </ul>
+          <p class="muted">These choices sound small — until they save hours. And hours move project margins.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== Process ====== -->
+  <section id="process" class="band" aria-labelledby="proc-h">
+    <div class="container">
+      <span class="eyebrow">Our Playbook</span>
+      <h2 id="proc-h" class="h2">Simple three-step path from spec to shipment</h2>
+      <div class="grid cols-3">
+        <article class="card process">
+          <div class="step">
+            <h3>1) Scope & Match</h3>
+            <p class="muted">Send the part list or a napkin sketch. We match to stocked SKUs, verify compatibility, and propose alternates where lead times are risky.</p>
+          </div>
+          <div class="step">
+            <h3>2) Confirm & Kit</h3>
+            <p class="muted">We lock specs, pre-configure firmware and parameters when requested, and kit by installation area to reduce site handling.</p>
+          </div>
+          <div class="step">
+            <h3>3) Ship & Support</h3>
+            <p class="muted">Same-day pick for in-stock lines, milestone notifications, and an engineer on call for first-power assistance.</p>
+          </div>
+        </article>
+        <article class="card">
+          <h3>Service Levels</h3>
+          <p class="muted">Standard (1–3 days), Expedited (next-day), and Critical (same-day/hot-shot in South FL). International export available with ITAR screening.</p>
+          <p class="muted">All shipments include ESD-safe handling where applicable and shock/tilt indicators for sensitive drives and optics.</p>
+        </article>
+        <article class="card">
+          <h3>Quality & Compliance</h3>
+          <p class="muted">UL 508A for panel shops, CE guidance, RoHS/REACH tracking, CoC on request, and careful vendor vetting. We prioritize authenticated supply chains.</p>
+          <p class="muted">For safety gear, we track batch data and expiration where relevant (e.g., gas sensors) and maintain recall readiness.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== Contact CTA (opens modal) ====== -->
+  <section id="contact" class="mapband band" aria-labelledby="contact-h">
+    <div class="container wrap">
+      <span class="eyebrow">Start Your Quote</span>
+      <h2 id="contact-h" class="h2">Tell us the parts list — we’ll do the rest</h2>
+      <p class="lead">Click the button to open our privacy-friendly contact form. We don’t use tracking cookies and only collect details required to assist you.</p>
+      <div>
+        <button class="cta" data-open-modal="contact" aria-haspopup="dialog" aria-controls="contact-modal">Open Contact Form</button>
+        <span class="pill" aria-label="Response time">Avg. response: &lt; 1 business hour</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== Contact Details (address + email only) ====== -->
+  <section class="band" aria-labelledby="where-h">
+    <div class="container">
+      <span class="eyebrow">Where to Reach Us</span>
+      <h2 id="where-h" class="h2">Contacts</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Address</h3>
+          <p class="muted">1600 Ponce De Leon Blvd, Suite 1000<br/>Coral Gables, FL 33134</p>
+        </div>
+        <div class="card">
+          <h3>Email</h3>
+          <p class="muted">Primary inbox: <a href="mailto:kenji@processautomationservices.org">kenji@processautomationservices.org</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== Footer ====== -->
+  <footer role="contentinfo">
+    <div class="footgrid">
+      <div>
+        <strong>PROCESS AUTOMATION SERVICES LLC</strong><br/>
+        Machinery, Equipment, and Supplies Merchant Wholesalers • Wholesale Trade (Durable Goods)
+        <p class="small">
+          © <span id="year"></span> PROCESS AUTOMATION SERVICES LLC. All rights reserved. We do not sell personal data.
+          We avoid third-party trackers. Data you submit is used solely to respond to your request.
+        </p>
+      </div>
+      <div>
+        <h4 class="sr-only">Policies</h4>
+        <p class="small">
+          <strong>Privacy & Accessibility</strong><br/>
+          No cookies by default. Forms request only necessary details (name, company, email, message).
+          Our site targets WCAG 2.1 AA for contrast and keyboard navigation. Report issues to
+          <a href="mailto:kenji@processautomationservices.org">accessibility@processautomationservices.org</a>.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ====== Modal: Contact Form ====== -->
+  <div class="modal-backdrop" id="contact-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="contact-title" aria-describedby="contact-desc">
+    <div class="modal" role="document">
+      <header>
+        <h2 id="contact-title" class="h2" style="margin:0">Request a Quote</h2>
+        <button class="close" data-close-modal aria-label="Close dialog">×</button>
+        <p id="contact-desc" class="muted" style="margin:8px 0 0">
+          Tell us what you’re looking for — part numbers, quantities, lead time target. We’ll respond by email.
+        </p>
+      </header>
+      <form id="contact-form" novalidate>
+        <div class="formgrid">
+          <div>
+            <label for="name">Your Name</label>
+            <input id="name" name="name" autocomplete="name" required aria-required="true" />
+          </div>
+          <div>
+            <label for="company">Company</label>
+            <input id="company" name="company" autocomplete="organization" />
+          </div>
+          <div>
+            <label for="email">Work Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required aria-required="true" />
+          </div>
+          
+          <div class="span2">
+            <label for="message">Message / Part List</label>
+            <textarea id="message" name="message" placeholder="e.g., 12 × 1734-IB8, 4 × 6AV2124-0GC01-0AX0, 2 × 22B-D2P3N104, need by 10/28"></textarea>
+          </div>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn-secondary" data-close-modal>Cancel</button>
+          <button type="submit" class="cta">Send Securely</button>
+        </div>
+        <p class="small muted" style="margin-top:8px">
+          By submitting, you consent to be contacted about this request. We don’t use your details for advertising or share them with third-party marketers.
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ====== Modal: Success ====== -->
+  <div class="modal-backdrop" id="success-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="success-title" aria-describedby="success-desc">
+    <div class="modal" role="document">
+      <header>
+        <h2 id="success-title" class="h2" style="margin:0">Message sent!</h2>
+        <button class="close" data-close-modal aria-label="Close dialog">×</button>
+        <p id="success-desc" class="muted" style="margin:8px 0 0">
+          Thanks — your request has been submitted. A specialist will email you from
+          <strong>kenji@processautomationservices.org</strong> shortly.
+        </p>
+      </header>
+      <div class="actions">
+        <button class="cta" data-close-modal>Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Accessibility & smooth behavior — no external libraries.
+    (function(){
+      const $ = (s, r=document)=>r.querySelector(s);
+      const $$ = (s, r=document)=>Array.from(r.querySelectorAll(s));
+
+      // Current year
+      $('#year').textContent = new Date().getFullYear();
+
+      // Modal handling with focus trap and ESC close
+      const body = document.body;
+      let lastFocused = null;
+
+      function openModal(id){
+        const modal = document.getElementById(id+'-modal');
+        if(!modal) return;
+        lastFocused = document.activeElement;
+        modal.setAttribute('aria-hidden','false');
+        body.style.overflow='hidden';
+        // Focus the first focusable element inside
+        const focusables = $$('button, [href], input, textarea, select, [tabindex]:not([tabindex="-1"])', modal)
+          .filter(el => !el.hasAttribute('disabled'));
+        (focusables[0]||modal).focus();
+
+        // Trap focus
+        modal.addEventListener('keydown', trap);
+        function trap(e){
+          if(e.key==='Escape'){ closeModal(modal); return; }
+          if(e.key!=='Tab') return;
+          const first = focusables[0], last = focusables[focusables.length-1];
+          if(e.shiftKey && document.activeElement===first){ last.focus(); e.preventDefault(); }
+          else if(!e.shiftKey && document.activeElement===last){ first.focus(); e.preventDefault(); }
+        }
+      }
+
+      function closeModal(el){
+        const modal = el.classList.contains('modal-backdrop') ? el : el.closest('.modal-backdrop');
+        if(!modal) return;
+        modal.setAttribute('aria-hidden','true');
+        body.style.overflow='';
+        if(lastFocused) lastFocused.focus();
+      }
+
+      $$('[data-open-modal]').forEach(btn=>{
+        btn.addEventListener('click', e=>{
+          const id = btn.getAttribute('data-open-modal');
+          openModal(id);
+        });
+      });
+
+      $$('[data-close-modal]').forEach(btn=>{
+        btn.addEventListener('click', e=>closeModal(btn));
+      });
+
+      // Click outside the dialog closes it
+      $$('.modal-backdrop').forEach(back=>{
+        back.addEventListener('mousedown', e=>{
+          if(e.target === back) closeModal(back);
+        });
+      });
+
+      // Contact form validation (privacy-friendly; stays client-side)
+      const form = $('#contact-form');
+      if(form){
+        form.addEventListener('submit', function(ev){
+          ev.preventDefault();
+          const name = $('#name').value.trim();
+          const email = $('#email').value.trim();
+          let valid = true;
+          function flag(el){ el.style.borderColor='var(--danger)'; el.focus(); valid=false; }
+          // Basic validations
+          if(!name) flag($('#name'));
+          // Simple email test:
+          const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+          if(!okEmail) flag($('#email'));
+          if(!valid) return;
+
+          // “Send” — demo only (no network). Show success modal.
+          closeModal($('#contact-modal'));
+          openModal('success');
+
+          // Reset
+          form.reset();
+          // restore neutral borders
+          $$('#contact-form input, #contact-form textarea').forEach(i=>i.style.borderColor='rgba(255,255,255,.14)');
+        });
+      }
+
+      // Respect reduced motion (Apple HIG friendly)
+      const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if(mq.matches){ document.documentElement.style.scrollBehavior='auto'; }
+
+      // Add smooth anchor scroll offset fix for iOS Safari (optional enhancement)
+      $$('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', function(e){
+          const id = a.getAttribute('href').slice(1);
+          const t = document.getElementById(id);
+          if(t){ e.preventDefault(); t.scrollIntoView({behavior: mq.matches?'auto':'smooth', block:'start'}); }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
